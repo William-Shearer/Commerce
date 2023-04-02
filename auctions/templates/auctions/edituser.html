@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+	
+	<div class="row">
+		<div class="grad-head text-light pt-1 mb-1">
+			<h2>Edit User</h2>
+		</div>
+	</div>
+	
+	{% if messages %}
+		{% for message in messages %}
+		
+			<div class="row">
+				<div class="grad-msg border border-danger rounded text-danger pt-1 mb-1">
+					<h2>{{ message }}</h2>
+				</div>
+			</div>
+		
+		{% endfor %}
+	{% endif %}
+	
+	
+	<form action="{% url 'edituser' %}" method="POST">
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input class="btn btn-primary" type="submit" value="Proceed">
+	</form>
+	<!--
+	Allow me to consider that the user ended up here by mistake and does not want to edit data.
+	This needs a link to route back to the index, at least...
+	-->
+	Here by mistake? <a href="{% url 'index' %}">Abort edit</a>
+{% endblock %}

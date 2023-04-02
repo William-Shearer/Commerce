@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+{% block title %}Categories{% endblock %}
+{% block body %}
+	<div class="row bg-danger px-2 text-light">
+		<h2>Categories</h2>
+	</div>
+	<div class="row justify-content-around text-center">
+		{% for category in categories %}
+			<div class="card text-dark bg-warning border border-dark p-1 m-1" style="width: 10rem;">
+				<div class="text-center">
+					<img src="{% static 'auctions/media/'|add:category.category|add:'.jpg' %}" alt="bike category" class="card-img-top border border-dark rounded m-1" style="max-width: 95%; height: auto;">
+					<form action="{% url 'category' %}" method="POST">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-primary btn-sm border border-dark rounded" style="width: 9rem;" name="category" value="{{ category.category }}">{{ category.category }}</button>
+					</form>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="row d-flex justify-content-center p-1 m-1">
+		<a href="{% url 'index' %}" class="btn btn-sm std-btn btn-primary border border-dark text-light my_1" style="width: 10rem;">Back to Listings</a>
+	</div>
+	
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+		<div class="grad-head text-light pt-1 mb-1">
+			<h2>Register</h2>
+		</div>
+	</div>
+	
+	{% if messages %}
+		{% for message in messages %}
+		
+			<div class="row">
+				<div class="grad-msg border border-danger rounded text-danger pt-1 mb-1">
+					<h2>{{ message }}</h2>
+				</div>
+			</div>
+		
+		{% endfor %}
+	{% endif %}
+	
+	<!--
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+	-->
+	
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+		<!--
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+		-->
+		<table>
+			{{ form.as_table }}
+		</table>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a><br>
+	Here by mistake? <a href="{% url 'index' %}">Back to listings</a>
+
+{% endblock %}
